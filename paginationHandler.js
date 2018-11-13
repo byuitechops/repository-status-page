@@ -6,14 +6,11 @@
 /*************************************************************************
  * 
  *************************************************************************/
-async function pagination () {
-    async function concatPagination (apiCall) {
-        const xhttp = new XMLHttpRequest();
-        xhttp.open('GET', apiCall);
-        xhttp.send();
-        
-    }
-    await concatPagination();
+async function concatPages (page = 0) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open('GET', `${apiCall}?page=${page++}`);
+    xhttp.send();
+    console.dir(xhttp, {depth: null});
 }
 
 
