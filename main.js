@@ -4,8 +4,8 @@ async function main() {
         document.getElementById(targetColumn).innerHTML += card;
     }
 
-    function fillColumns() {
-        var repos = await concatPages();
+    async function fillColumns() {
+        var repos = await concatPages('https://api.github.com/orgs/byuitechops/repos');
 
         repos.forEach(function(repo) {
             var card = createNextCard(repo.name, repo.url, repo.updated_at);
@@ -45,5 +45,7 @@ async function main() {
         }
         return false;
     }
+
+    await fillColumns();
 
 }
