@@ -1,11 +1,11 @@
-function createNextCard(repoTitle, repoLink, lastUpdated) {
-
-    var description = "This is a test project";
-    var lastUpdated = 'May 1st';
+function createNextCard(repoTitle, repoLink, creationDate, lastUpdated) {
     
     var repoCard = `<div class='mdl-card'>
                         <div class='mdl-card__title'>
-                            <h2 class='mdl-card__title-text'>${repoTitle}</h2>
+                            <h6 class='mdl-card__title-text'>${repoTitle}</h6>
+                        </div>
+                        <div class='mdl-card__supporting-text'>
+                            Created On: ${creationDate}
                         </div>
                         <div class='mdl-card__supporting-text'>
                             Last Updated: ${lastUpdated}
@@ -15,7 +15,7 @@ function createNextCard(repoTitle, repoLink, lastUpdated) {
                                 Go to Repo
                             </a>
                         </div>
-                    </div>`; 
+                    </div><hr/>`; 
 
     return repoCard;
 

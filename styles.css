@@ -15,14 +15,14 @@ main {
 }
 
 .inDev {
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(160, 160, 160, 0.623);
 }
 
 .inMain {
-    background-color: rgba(0, 255, 0, 0.5);
+    background-color: rgba(130, 130, 130, 0.623);
 }
 
 .inClosed {
-    background-color: rgba(0, 0, 255, 0.5);
+    background-color: rgba(145, 145, 145, 0.623);
 
 }

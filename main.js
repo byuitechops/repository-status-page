@@ -1,32 +1,32 @@
-'using strict'
+'using strict';
 async function main() {
     function loadCard(targetColumn, card) {
         document.getElementById(targetColumn).innerHTML += card;
     }
 
     async function fillColumns() {
-        var repos = await concatPages('https://api.github.com/orgs/byuitechops/repos');
+        concatPages('https://api.github.com/orgs/byuitechops/repos')
+            .then((repos) => {
+                repos.forEach(function(repo) {
+                    var card = createNextCard(repo.name, repo.url, repo.created_at, repo.updated_at);
+                    if (isClosed(repo)) {
+                        loadCard('closed', card);
+                    } else if (isDev(repo)) {
+                        loadCard('development', card);
+                    } else if (isMaint(repo)) {
+                        loadCard('maintenance', card);
+                    }
+                });
+            });
 
-        repos.forEach(function(repo) {
-            var card = createNextCard(repo.name, repo.url, repo.updated_at);
-            
-            if (isClosed(repo)) {
-                loadCard("closed", card);
-            } else if (isDev(repo)) {
-                loadCard("development", card);
-            } else if (isMaint(repo)) {
-                loadCard("maintenance", card);
-            }
-           
-
-        });
+        
 
     }
 
     //IN-DEVELOPMENT: Created within the last month
     function isDev(repo) {
         var creationDate = new Date(repo.created_at);
-        if (creationDate.getTime() < Date.now() - (30 * 24 * 60 * 60 * 1000)) {
+        if (creationDate.getTime() > Date.now() - 1 * 30 * 24 * 60 * 60 * 1000) {
             return true;
         }
         return false;
@@ -40,7 +40,7 @@ async function main() {
     //CLOSED: It has been 1 month since last update to repo
     function isClosed(repo) {
         var lastUpdated = new Date(repo.updated_at);
-        if (lastUpdated.getTime() < Date.now() - (30 * 24 * 60 * 60 * 1000)) {
+        if (lastUpdated.getTime() < Date.now() - 1 * 30 * 24 * 60 * 60 * 1000) {
             return true;
         }
         return false;
