@@ -27,6 +27,11 @@ main {
 
 }
 
-.card-item {
+.mini-date {
+    font-size: 0.75em;
     /* font-family: monospace; */
+}
+
+pre {
+    margin: 0px
 }
