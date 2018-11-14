@@ -6,9 +6,10 @@ async function main() {
 
     async function fillColumns() {
         concatPages('https://api.github.com/orgs/byuitechops/repos')
-            .then((repos) => {
+            .then( (repos) => sortReposByLastCommitDate(repos) )
+            .then( (repos) => {
                 repos.forEach(function(repo) {
-                    var card = createNextCard(repo.name, repo.url, repo.created_at, repo.updated_at);
+                    var card = createNextCard(repo.name, repo.html_url, repo.created_at, repo.updated_at);
                     if (isClosed(repo)) {
                         loadCard('closed', card);
                     } else if (isDev(repo)) {

@@ -13,14 +13,12 @@ async function concatPages (apiCall = '', page = 1, collectionOfRepos = []) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             let data = JSON.parse(xhttp.responseText);
             if (data.length > 0) {
-                console.log(`DATA FROM ONE REQUEST: ${data}`);
                 collectionOfRepos = collectionOfRepos.concat(data);
                 collectionOfRepos = concatPages(apiCall, page, collectionOfRepos);
-            }
-        }
+            } else console.log('Completed Concatination of Pagination');
+        } else console.error('An Error ocurred when making the request');
     };
     await xhttp.send();
-    console.log(`COLLECTION OF REPOS: ${collectionOfRepos}`);
     return collectionOfRepos;
 }
 
